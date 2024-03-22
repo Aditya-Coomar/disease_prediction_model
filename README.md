@@ -31,7 +31,6 @@ pip install -U matplotlib
 ```
 
 <br/>
-<br/>
 
 2. Run the project
  > [!NOTE]
