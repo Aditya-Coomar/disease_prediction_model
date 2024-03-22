@@ -40,4 +40,4 @@ pip install -U matplotlib
 streamlit run app.py
 ```
 
-### The project will open in localhost:[port-number]
+### The app will start running in your browser
