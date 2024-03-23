@@ -43,7 +43,13 @@ streamlit run app.py
 <br />
 <br />
 <div align=center><h1>Application Preview</h1> </div>
-![app_disease_prediction_model_page-0001](https://github.com/Aditya-Coomar/disease_prediction_model/assets/92925750/047f6b07-ef8f-443d-984a-3e1b40c109b7)
-![app_disease_prediction_model_page-0002](https://github.com/Aditya-Coomar/disease_prediction_model/assets/92925750/9e0d48a7-c97e-45d3-aeeb-482ed06de606)
-![app_disease_prediction_model_page-0003](https://github.com/Aditya-Coomar/disease_prediction_model/assets/92925750/77c31177-546b-4d44-ae7e-ad3c4685bb0f)
+<br />
+<div align=center>
+ <img src="https://github.com/Aditya-Coomar/disease_prediction_model/assets/92925750/06420d6b-8400-4a4d-9097-489c913489a0" />
+ <img src="https://github.com/Aditya-Coomar/disease_prediction_model/assets/92925750/6a02d2d2-53bf-420d-8f9a-288bf2ca8539" />
+ <img src="https://github.com/Aditya-Coomar/disease_prediction_model/assets/92925750/bd6c415c-46f7-44aa-a68d-1eb3518ca421" />
+ <img src="https://github.com/Aditya-Coomar/disease_prediction_model/assets/92925750/ffe99325-a54b-4197-969b-43e03838d776" />
+ <img src="https://github.com/Aditya-Coomar/disease_prediction_model/assets/92925750/b72d606d-8774-4a66-99ee-c3083b23c1ad" />
+ <img src="https://github.com/Aditya-Coomar/disease_prediction_model/assets/92925750/0b2d07b5-72a2-44d3-bdef-ee4f31c6827a" />
+</div>
 
