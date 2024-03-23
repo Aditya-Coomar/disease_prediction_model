@@ -13,7 +13,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 import streamlit as st
 import streamlit_option_menu as option_menu
 import uuid
-
+import os
 st.set_page_config(page_title="Disease Prediction Model", page_icon="🧊", layout="wide", initial_sidebar_state="auto")
 
 # ====================================================
@@ -105,41 +105,47 @@ st.divider()
 row2_col1, row2_col2 = st.columns(2,gap="large")
 
 with row2_col1 :
-	# Training and testing SVM Classifier
-	svm_model = SVC()
-	svm_model.fit(X_train, y_train)
-	preds = svm_model.predict(X_test)
-
-	st.info("Accuracy by Support Vector Machine Classifier")
-	row2_sub1_col1, row2_sub1_col2 = st.columns(2)
-	row2_sub1_col1.success(f"On Train Dataset\
-		  : {accuracy_score(y_train, svm_model.predict(X_train))*100}")
-	
-	row2_sub1_col2.success(f"On Test Dataset\
+	@st.cache_resource
+	def train_test_svm():
+		# Training and testing SVM Classifier
+		svm_model = SVC()
+		svm_model.fit(X_train, y_train)
+		preds = svm_model.predict(X_test)
+		
+		st.info("Accuracy by Support Vector Machine Classifier")
+		row2_sub1_col1, row2_sub1_col2 = st.columns(2)
+		row2_sub1_col1.success(f"On Train Dataset\
+						 : {accuracy_score(y_train, svm_model.predict(X_train))*100}")
+		
+		row2_sub1_col2.success(f"On Test Dataset\
 		  : {accuracy_score(y_test, preds)*100}")
-	cf_matrix = confusion_matrix(y_test, preds)
-	svm_plot = plt.figure(figsize=(12,8))
-	sns.heatmap(cf_matrix, annot=True)
-	plt.title("Confusion Matrix for SVM Classifier on Test Data")
-	st.pyplot(svm_plot)
+		cf_matrix = confusion_matrix(y_test, preds)
+		svm_plot = plt.figure(figsize=(12,8))
+		sns.heatmap(cf_matrix, annot=True)
+		plt.title("Confusion Matrix for SVM Classifier on Test Data")
+		st.pyplot(svm_plot)
+	train_test_svm()
 
 with row2_col2 :
-	# Training and testing Naive Bayes Classifier
-	nb_model = GaussianNB()
-	nb_model.fit(X_train, y_train)
-	preds = nb_model.predict(X_test)
-	st.info("Accuracy by Gaussian Naive Bayes Classifier")
-	row2_sub2_col1, row2_sub2_col2 = st.columns(2)
-	row2_sub2_col1.success(f"On Train Dataset\
-		  : {accuracy_score(y_train, nb_model.predict(X_train))*100}")
-	
-	row2_sub2_col2.success(f"On Test Dataset\
-		  : {accuracy_score(y_test, preds)*100}")
-	cf_matrix = confusion_matrix(y_test, preds)
-	nbc_plot = plt.figure(figsize=(12,8))
-	sns.heatmap(cf_matrix, annot=True)
-	plt.title("Confusion Matrix for Naive Bayes Classifier on Test Data")
-	st.pyplot(nbc_plot)
+	@st.cache_resource
+	def train_test_nb():
+		# Training and testing Naive Bayes Classifier
+		nb_model = GaussianNB()
+		nb_model.fit(X_train, y_train)
+		preds = nb_model.predict(X_test)
+		st.info("Accuracy by Gaussian Naive Bayes Classifier")
+		row2_sub2_col1, row2_sub2_col2 = st.columns(2)
+		row2_sub2_col1.success(f"On Train Dataset\
+						 : {accuracy_score(y_train, nb_model.predict(X_train))*100}")
+		
+		row2_sub2_col2.success(f"On Test Dataset\
+						 : {accuracy_score(y_test, preds)*100}")
+		cf_matrix = confusion_matrix(y_test, preds)
+		nbc_plot = plt.figure(figsize=(12,8))
+		sns.heatmap(cf_matrix, annot=True)
+		plt.title("Confusion Matrix for Naive Bayes Classifier on Test Data")
+		st.pyplot(nbc_plot)
+	train_test_nb()
 
 
 
@@ -149,23 +155,25 @@ with row2_col2 :
 st.divider()
 row3_col1, row3_col2 = st.columns(2, gap="large")
 with row3_col1 :
-	# Training and testing Random Forest Classifier
-	rf_model = RandomForestClassifier(random_state=18)
-	rf_model.fit(X_train, y_train)
-	preds = rf_model.predict(X_test)
-	st.info("Accuracy by Random Forest Classifier")
-	row3_sub1_col1, row3_sub1_col2 = st.columns(2)
-	row3_sub1_col1.success(f"On Train Dataset\
-		  : {accuracy_score(y_train, rf_model.predict(X_train))*100}")
-	
-	row3_sub1_col2.success(f"On Test Dataset\
-		  : {accuracy_score(y_test, preds)*100}")
-	
-	cf_matrix = confusion_matrix(y_test, preds)
-	rfc_plot = plt.figure(figsize=(12,8))
-	sns.heatmap(cf_matrix, annot=True)
-	plt.title("Confusion Matrix for Random Forest Classifier on Test Data")
-	st.pyplot(rfc_plot)
+	@st.cache_resource
+	def train_test_rfc():
+		# Training and testing Random Forest Classifier
+		rf_model = RandomForestClassifier(random_state=18)
+		rf_model.fit(X_train, y_train)
+		preds = rf_model.predict(X_test)
+		st.info("Accuracy by Random Forest Classifier")
+		row3_sub1_col1, row3_sub1_col2 = st.columns(2)
+		row3_sub1_col1.success(f"On Train Dataset\
+						 : {accuracy_score(y_train, rf_model.predict(X_train))*100}")
+		row3_sub1_col2.success(f"On Test Dataset\
+						 : {accuracy_score(y_test, preds)*100}")
+		
+		cf_matrix = confusion_matrix(y_test, preds)
+		rfc_plot = plt.figure(figsize=(12,8))
+		sns.heatmap(cf_matrix, annot=True)
+		plt.title("Confusion Matrix for Random Forest Classifier on Test Data")
+		st.pyplot(rfc_plot)
+	train_test_rfc()
 
 with row3_col2 :
 	# Training the models on whole data
@@ -205,7 +213,6 @@ with row3_col2 :
 	st.pyplot(combined_plot)
 
 
-
 # ====================================================
 # ROW 4 - Model Testing
 #=====================================================
@@ -231,6 +238,7 @@ data_dict = {
 # Defining the Function
 # Input: string containing symptoms separated by commas
 # Output: Generated predictions by models
+@st.cache_resource
 def predictDisease(symptoms):
 	symptoms = symptoms.split(",")
 	
@@ -279,6 +287,7 @@ with row4_col2 :
 	row4_sub1_col2.write(symtoms_list_regenerated[66:])
 
 with row4_col1 :
+	st.warning("WARNING - This model is only for learning and testing purpose and should not be used for giving any actual diagnosis")
 	predict_disease_form = st.form("Disease Prediction Form",clear_on_submit=True)
 	r1, r2 = predict_disease_form.columns(2)
 	symptom_value_range = tuple(["None"] + symtoms_list_regenerated)
@@ -300,14 +309,41 @@ with row4_col1 :
 		usr_entry_dict = {"Symptom Number":["Symptom %d" % j for j in range(1,7)], "Data":list_entry}
 		usr_entry_symptoms_df = pd.DataFrame(usr_entry_dict,index=[n for n in range(1,7)])
 		st.dataframe(usr_entry_symptoms_df,use_container_width=True,hide_index=True)
+		id = uuid.uuid4()
 		try:
-			st.success("Model Predictions") 
-			st.write(predictDisease(symptoms_group))
+			st.success(f"Model Predictions {id}")
+			output = predictDisease(symptoms_group)
+			st.write(output)
+			file_name = f"output/model_predictions_{id}.txt"
+			try :
+				with open(file_name,"w") as file :
+					file.write(f"Model Predictions {id}\n\n")
+					file.write(f"{str(usr_entry_symptoms_df)}\n\n")
+					file.write(str(output))
+					file.close()
+				st.success(f"Model Predictions have been saved in the file {file_name}")
+			except Exception as e :
+				st.error("There is some error in saving the predictions.")
 		except Exception as e :
 			st.error("There is some error in the symptoms combination.")
 	
 	st.divider()
-	st.warning("WARNING - This model is only for learning and testing purpose and should not be used for giving any actual diagnosis")
+	file_list = tuple([''] + os.listdir("output"))
+	st.info("View previous predictions by the model")
+	fetch_file_form = st.form("Fetch File Form",clear_on_submit=True)
+	file_fetch = fetch_file_form.selectbox("Select File",file_list,placeholder="Choose a File")
+	fetch_file_form_submit = fetch_file_form.form_submit_button("Fetch File Content")
+	if fetch_file_form_submit == True :
+		try :
+			if file_fetch != '' :
+				file_path = f"output/{file_fetch}"
+				with open(file_path,"r") as file :
+					file_content = file.read()
+					st.code(file_content)
+			else :
+				st.warning("Please select a file to view the predictions")
+		except :
+			st.error("There is some error in fetching the file content")
 
 st.divider()
 st.info(f"Session State ID - {uuid.uuid4()}")

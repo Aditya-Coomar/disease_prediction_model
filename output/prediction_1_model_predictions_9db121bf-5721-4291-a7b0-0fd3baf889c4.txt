@@ -1,0 +1,11 @@
+Model Predictions 9db121bf-5721-4291-a7b0-0fd3baf889c4
+
+  Symptom Number          Data
+1      Symptom 1       Acidity
+2      Symptom 2          None
+3      Symptom 3          None
+4      Symptom 4  Constipation
+5      Symptom 5          None
+6      Symptom 6          None
+
+{'rf_model_prediction': 'Dimorphic hemmorhoids(piles)', 'naive_bayes_prediction': 'Dimorphic hemmorhoids(piles)', 'svm_model_prediction': 'Dimorphic hemmorhoids(piles)', 'final_prediction': 'Dimorphic hemmorhoids(piles)'}
