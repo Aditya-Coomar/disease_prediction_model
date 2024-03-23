@@ -1,0 +1,11 @@
+Model Predictions 8b36d89f-0795-4312-a160-72df3e386ed0
+
+  Symptom Number        Data
+1      Symptom 1       Cough
+2      Symptom 2      Chills
+3      Symptom 3    Headache
+4      Symptom 4  High Fever
+5      Symptom 5        None
+6      Symptom 6        None
+
+{'rf_model_prediction': 'Bronchial Asthma', 'naive_bayes_prediction': 'Bronchial Asthma', 'svm_model_prediction': 'AIDS', 'final_prediction': 'AIDS'}

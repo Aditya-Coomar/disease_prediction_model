@@ -1,0 +1,11 @@
+Model Predictions cc30067f-da93-45cc-819c-95cdc310e549
+
+  Symptom Number                  Data
+1      Symptom 1             Skin Rash
+2      Symptom 2  Nodal Skin Eruptions
+3      Symptom 3               Itching
+4      Symptom 4                  None
+5      Symptom 5                  None
+6      Symptom 6                  None
+
+{'rf_model_prediction': 'Fungal infection', 'naive_bayes_prediction': 'Fungal infection', 'svm_model_prediction': 'Fungal infection', 'final_prediction': 'Fungal infection'}
