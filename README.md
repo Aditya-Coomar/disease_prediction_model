@@ -34,7 +34,7 @@ pip install -U matplotlib
 
 2. Run the project
  > [!NOTE]
- > Go to the root directory of the project and open the terminal there.
+ > Go to the root directory of the project and open the terminal there and run the following command.
 ```
 streamlit run app.py
 ```
